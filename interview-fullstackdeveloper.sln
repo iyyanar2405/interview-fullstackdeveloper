@@ -1,0 +1,42 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp-LLM-Agentic-StepByStep", "CSharp-LLM-Agentic-StepByStep", "{3BE163EA-CC6E-DC87-B929-2DBF8987E7C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mcp", "mcp", "{4FE41B05-76E7-0763-517E-E69DADAC5595}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalMcpServer", "CSharp-LLM-Agentic-StepByStep\mcp\MinimalMcpServer\MinimalMcpServer.csproj", "{04A3E0EC-6F92-4ADB-21F0-C79F263CBB5F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{741893D3-8A7B-17CD-61EE-8A816D56EE5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentPlayground", "CSharp-LLM-Agentic-StepByStep\src\AgentPlayground\AgentPlayground.csproj", "{10533ACF-6B76-2FD9-B86C-7CE2CF5A3F6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04A3E0EC-6F92-4ADB-21F0-C79F263CBB5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04A3E0EC-6F92-4ADB-21F0-C79F263CBB5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04A3E0EC-6F92-4ADB-21F0-C79F263CBB5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04A3E0EC-6F92-4ADB-21F0-C79F263CBB5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10533ACF-6B76-2FD9-B86C-7CE2CF5A3F6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10533ACF-6B76-2FD9-B86C-7CE2CF5A3F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10533ACF-6B76-2FD9-B86C-7CE2CF5A3F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10533ACF-6B76-2FD9-B86C-7CE2CF5A3F6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4FE41B05-76E7-0763-517E-E69DADAC5595} = {3BE163EA-CC6E-DC87-B929-2DBF8987E7C4}
+		{04A3E0EC-6F92-4ADB-21F0-C79F263CBB5F} = {4FE41B05-76E7-0763-517E-E69DADAC5595}
+		{741893D3-8A7B-17CD-61EE-8A816D56EE5A} = {3BE163EA-CC6E-DC87-B929-2DBF8987E7C4}
+		{10533ACF-6B76-2FD9-B86C-7CE2CF5A3F6A} = {741893D3-8A7B-17CD-61EE-8A816D56EE5A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22751D78-6F3B-4E60-8C33-019D7B1E96F4}
+	EndGlobalSection
+EndGlobal
