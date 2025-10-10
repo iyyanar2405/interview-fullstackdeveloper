@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Complete Examples Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+        
+        .example-section {
+            background: white;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .example-header {
+            background-color: #495057;
+            color: white;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .example-content {
+            padding: 1.5rem;
+        }
+        
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .btn.secondary { background-color: #6c757d; }
+        .btn.success { background-color: #28a745; }
+        .btn.danger { background-color: #dc3545; }
+        .btn.warning { background-color: #ffc107; color: #212529; }
+        
+        .demo-box {
+            background-color: #e9ecef;
+            border: 2px dashed #6c757d;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-box.highlight {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+        }
+        
+        .animated {
+            transition: all 0.5s ease;
+        }
+        
+        .slideshow-container {
+            position: relative;
+            max-width: 500px;
+            margin: auto;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            min-height: 150px;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .slide-controls {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+        }
+        
+        .modal-close:hover {
+            color: #000;
+        }
+        
+        .tabs {
+            display: flex;
+            background-color: #f8f9fa;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background-color: #e9ecef;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .form-group input.error {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .accordion {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            background-color: #f8f9fa;
+            padding: 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+        
+        .accordion-header:hover {
+            background-color: #e9ecef;
+        }
+        
+        .accordion-header.active {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .accordion-content {
+            padding: 15px;
+            display: none;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 1;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success { background-color: #28a745; }
+        .notification.error { background-color: #dc3545; }
+        .notification.warning { background-color: #ffc107; color: #212529; }
+        .notification.info { background-color: #17a2b8; }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007bff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .counter-display {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            color: white;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        
+        .todo-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .todo-item input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        
+        .todo-item.completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        
+        .todo-input {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .todo-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .todo-input button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>jQuery Complete Examples Collection</h1>
+            <p>Comprehensive demonstrations of jQuery concepts from beginner to advanced</p>
+        </div>
+
+        <!-- Basic DOM Manipulation -->
+        <div class="example-section">
+            <div class="example-header">1. Basic DOM Manipulation</div>
+            <div class="example-content">
+                <div class="demo-box" id="manipulate-target">
+                    This box will be manipulated
+                </div>
+                <button class="btn" onclick="changeText()">Change Text</button>
+                <button class="btn secondary" onclick="changeHTML()">Change HTML</button>
+                <button class="btn success" onclick="addCSS()">Add CSS</button>
+                <button class="btn warning" onclick="toggleClass()">Toggle Class</button>
+                <button class="btn danger" onclick="resetBox()">Reset</button>
+            </div>
+        </div>
+
+        <!-- Event Handling -->
+        <div class="example-section">
+            <div class="example-header">2. Event Handling</div>
+            <div class="example-content">
+                <button class="btn" id="single-click">Single Click</button>
+                <button class="btn secondary" id="double-click">Double Click</button>
+                <button class="btn success" id="hover-btn">Hover Me</button>
+                <button class="btn warning" id="context-menu">Right Click</button>
+                
+                <div style="margin-top: 15px;">
+                    <input type="text" id="key-input" placeholder="Type here to see key events">
+                    <div id="key-output" style="margin-top: 10px; font-family: monospace; font-size: 12px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animations and Effects -->
+        <div class="example-section">
+            <div class="example-header">3. Animations and Effects</div>
+            <div class="example-content">
+                <div class="demo-box animated" id="animation-target">
+                    Animate me!
+                </div>
+                <button class="btn" onclick="fadeAnimation()">Fade Toggle</button>
+                <button class="btn secondary" onclick="slideAnimation()">Slide Toggle</button>
+                <button class="btn success" onclick="customAnimation()">Custom Animation</button>
+                <button class="btn warning" onclick="chainedAnimation()">Chained Animation</button>
+                <button class="btn danger" onclick="stopAnimation()">Stop Animation</button>
+            </div>
+        </div>
+
+        <!-- Image Slideshow -->
+        <div class="example-section">
+            <div class="example-header">4. Image Slideshow</div>
+            <div class="example-content">
+                <div class="slideshow-container">
+                    <div class="slide active">
+                        <h3>Slide 1</h3>
+                        <p>This is the first slide with beautiful gradient background</p>
+                    </div>
+                    <div class="slide">
+                        <h3>Slide 2</h3>
+                        <p>Second slide with different content and styling</p>
+                    </div>
+                    <div class="slide">
+                        <h3>Slide 3</h3>
+                        <p>Third slide completing our slideshow demonstration</p>
+                    </div>
+                    <div class="slide-controls">
+                        <button class="btn" onclick="prevSlide()">Previous</button>
+                        <button class="btn success" onclick="toggleAutoplay()">Toggle Autoplay</button>
+                        <button class="btn" onclick="nextSlide()">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Dialog -->
+        <div class="example-section">
+            <div class="example-header">5. Modal Dialog System</div>
+            <div class="example-content">
+                <button class="btn" data-modal="info-modal">Info Modal</button>
+                <button class="btn secondary" data-modal="form-modal">Form Modal</button>
+                <button class="btn success" data-modal="confirm-modal">Confirmation Modal</button>
+            </div>
+        </div>
+
+        <!-- Tab System -->
+        <div class="example-section">
+            <div class="example-header">6. Tab System</div>
+            <div class="example-content">
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="tab1">HTML</button>
+                    <button class="tab-button" data-tab="tab2">CSS</button>
+                    <button class="tab-button" data-tab="tab3">JavaScript</button>
+                    <button class="tab-button" data-tab="tab4">jQuery</button>
+                </div>
+                <div class="tab-content active" id="tab1">
+                    <h3>HTML Content</h3>
+                    <p>HTML (HyperText Markup Language) is the standard markup language for creating web pages. It provides the structure and content of web documents using elements and tags.</p>
+                </div>
+                <div class="tab-content" id="tab2">
+                    <h3>CSS Content</h3>
+                    <p>CSS (Cascading Style Sheets) is used to style and layout web pages. It controls the presentation, including colors, fonts, spacing, and responsive design.</p>
+                </div>
+                <div class="tab-content" id="tab3">
+                    <h3>JavaScript Content</h3>
+                    <p>JavaScript is a programming language that enables interactive web pages. It's an essential part of web applications alongside HTML and CSS.</p>
+                </div>
+                <div class="tab-content" id="tab4">
+                    <h3>jQuery Content</h3>
+                    <p>jQuery is a JavaScript library that simplifies DOM manipulation, event handling, and AJAX requests with an easy-to-use API.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Validation -->
+        <div class="example-section">
+            <div class="example-header">7. Form Validation</div>
+            <div class="example-content">
+                <form id="validation-form">
+                    <div class="form-group">
+                        <label for="name">Name (Required):</label>
+                        <input type="text" id="name" name="name" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email (Required):</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone">
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                        <div class="error-message"></div>
+                    </div>
+                    <button type="submit" class="btn success">Submit Form</button>
+                    <button type="button" class="btn secondary" onclick="resetForm()">Reset</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Accordion -->
+        <div class="example-section">
+            <div class="example-header">8. Accordion Component</div>
+            <div class="example-content">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">What is jQuery?</div>
+                        <div class="accordion-content">
+                            <p>jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Why use jQuery?</div>
+                        <div class="accordion-content">
+                            <p>jQuery simplifies JavaScript programming with its easy-to-use API, cross-browser compatibility, and extensive plugin ecosystem. It allows developers to write less code while achieving more functionality.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Is jQuery still relevant?</div>
+                        <div class="accordion-content">
+                            <p>While modern frameworks like React and Vue have gained popularity, jQuery is still widely used for rapid development, legacy projects, and situations where a lightweight solution is preferred.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Bar and Counter -->
+        <div class="example-section">
+            <div class="example-header">9. Progress Bar and Counter</div>
+            <div class="example-content">
+                <div class="counter-display" id="counter">0</div>
+                <button class="btn" onclick="incrementCounter()">Increment</button>
+                <button class="btn secondary" onclick="decrementCounter()">Decrement</button>
+                <button class="btn danger" onclick="resetCounter()">Reset</button>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress"></div>
+                </div>
+                <button class="btn success" onclick="updateProgress()">Update Progress</button>
+            </div>
+        </div>
+
+        <!-- Todo List -->
+        <div class="example-section">
+            <div class="example-header">10. Interactive Todo List</div>
+            <div class="example-content">
+                <div class="todo-input">
+                    <input type="text" id="todo-input" placeholder="Enter a new task">
+                    <button onclick="addTodo()">Add Task</button>
+                </div>
+                <div id="todo-list"></div>
+                <button class="btn secondary" onclick="clearCompleted()">Clear Completed</button>
+                <button class="btn danger" onclick="clearAll()">Clear All</button>
+            </div>
+        </div>
+
+        <!-- Image Gallery -->
+        <div class="example-section">
+            <div class="example-header">11. Interactive Gallery</div>
+            <div class="example-content">
+                <div class="image-gallery">
+                    <div class="gallery-item" data-image="1">Image 1</div>
+                    <div class="gallery-item" data-image="2">Image 2</div>
+                    <div class="gallery-item" data-image="3">Image 3</div>
+                    <div class="gallery-item" data-image="4">Image 4</div>
+                    <div class="gallery-item" data-image="5">Image 5</div>
+                    <div class="gallery-item" data-image="6">Image 6</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AJAX Demonstration -->
+        <div class="example-section">
+            <div class="example-header">12. AJAX Data Loading</div>
+            <div class="example-content">
+                <button class="btn" onclick="loadUsers()">Load Users</button>
+                <button class="btn secondary" onclick="loadPosts()">Load Posts</button>
+                <button class="btn warning" onclick="simulateError()">Simulate Error</button>
+                
+                <div class="loading-spinner" id="loading"></div>
+                <div id="ajax-content" style="margin-top: 15px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Templates -->
+    <div id="info-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Information Modal</h2>
+            <p>This is an informational modal dialog created with jQuery. You can close it by clicking the X button, clicking outside the modal, or pressing the Escape key.</p>
+            <button class="btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <div id="form-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Form Modal</h2>
+            <form id="modal-form">
+                <div class="form-group">
+                    <label>Your Name:</label>
+                    <input type="text" name="modal-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Message:</label>
+                    <textarea name="modal-message" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn success">Submit</button>
+                <button type="button" class="btn secondary" onclick="closeModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Confirm Action</h2>
+            <p>Are you sure you want to perform this action? This cannot be undone.</p>
+            <button class="btn danger" onclick="confirmAction()">Yes, Proceed</button>
+            <button class="btn secondary" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div id="context-menu" style="display: none; position: absolute; background: white; border: 1px solid #ccc; padding: 10px; z-index: 1000; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="padding: 5px 10px; cursor: pointer;" onclick="contextAction('copy')">Copy</div>
+        <div style="padding: 5px 10px; cursor: pointer;" onclick="contextAction('paste')">Paste</div>
+        <div style="padding: 5px 10px; cursor: pointer;" onclick="contextAction('delete')">Delete</div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            initializeExamples();
+        });
+
+        function initializeExamples() {
+            setupEventHandlers();
+            setupFormValidation();
+            setupAccordion();
+            setupTabSystem();
+            setupModalSystem();
+            setupSlideshow();
+            console.log('All jQuery examples initialized!');
+        }
+
+        // Variables for slideshow
+        let currentSlide = 0;
+        let autoplayInterval;
+        let isAutoplay = false;
+        let counter = 0;
+
+        // Basic DOM Manipulation
+        function changeText() {
+            $('#manipulate-target').text('Text has been changed using jQuery!');
+            showNotification('Text changed successfully!', 'success');
+        }
+
+        function changeHTML() {
+            $('#manipulate-target').html('<strong>HTML</strong> content with <em>formatting</em>!');
+            showNotification('HTML updated!', 'info');
+        }
+
+        function addCSS() {
+            $('#manipulate-target').css({
+                'background-color': '#007bff',
+                'color': 'white',
+                'font-weight': 'bold',
+                'transform': 'scale(1.1)'
+            });
+            showNotification('CSS styles applied!', 'success');
+        }
+
+        function toggleClass() {
+            $('#manipulate-target').toggleClass('highlight');
+            showNotification('Class toggled!', 'info');
+        }
+
+        function resetBox() {
+            $('#manipulate-target')
+                .text('This box will be manipulated')
+                .removeClass('highlight')
+                .css({
+                    'background-color': '',
+                    'color': '',
+                    'font-weight': '',
+                    'transform': ''
+                });
+            showNotification('Box reset to original state!', 'warning');
+        }
+
+        // Event Handlers Setup
+        function setupEventHandlers() {
+            $('#single-click').on('click', function() {
+                showNotification('Single click detected!', 'info');
+            });
+
+            $('#double-click').on('dblclick', function() {
+                showNotification('Double click detected!', 'success');
+            });
+
+            $('#hover-btn').hover(
+                function() {
+                    $(this).css('background-color', '#28a745');
+                    showNotification('Mouse entered button!', 'info');
+                },
+                function() {
+                    $(this).css('background-color', '');
+                    showNotification('Mouse left button!', 'warning');
+                }
+            );
+
+            $('#context-menu').on('contextmenu', function(e) {
+                e.preventDefault();
+                $('#context-menu').css({
+                    top: e.pageY + 'px',
+                    left: e.pageX + 'px'
+                }).show();
+            });
+
+            $(document).on('click', function() {
+                $('#context-menu').hide();
+            });
+
+            $('#key-input').on('keyup', function(e) {
+                const output = $('#key-output');
+                output.append(`Key: ${e.which} (${String.fromCharCode(e.which)}) - Value: "${$(this).val()}"<br>`);
+                output.scrollTop(output[0].scrollHeight);
+            });
+        }
+
+        // Animation Functions
+        function fadeAnimation() {
+            $('#animation-target').fadeToggle(500);
+        }
+
+        function slideAnimation() {
+            $('#animation-target').slideToggle(500);
+        }
+
+        function customAnimation() {
+            $('#animation-target').animate({
+                width: 'toggle',
+                height: 'toggle',
+                opacity: 0.5
+            }, 1000);
+        }
+
+        function chainedAnimation() {
+            $('#animation-target')
+                .fadeOut(300)
+                .delay(200)
+                .fadeIn(300)
+                .animate({
+                    'margin-left': '50px'
+                }, 500)
+                .animate({
+                    'margin-left': '0px'
+                }, 500);
+        }
+
+        function stopAnimation() {
+            $('#animation-target').stop(true, true);
+        }
+
+        // Slideshow Functions
+        function setupSlideshow() {
+            startAutoplay();
+        }
+
+        function nextSlide() {
+            $('.slide').removeClass('active');
+            currentSlide = (currentSlide + 1) % $('.slide').length;
+            $('.slide').eq(currentSlide).addClass('active');
+        }
+
+        function prevSlide() {
+            $('.slide').removeClass('active');
+            currentSlide = currentSlide === 0 ? $('.slide').length - 1 : currentSlide - 1;
+            $('.slide').eq(currentSlide).addClass('active');
+        }
+
+        function startAutoplay() {
+            if (!isAutoplay) {
+                autoplayInterval = setInterval(nextSlide, 3000);
+                isAutoplay = true;
+            }
+        }
+
+        function stopAutoplay() {
+            if (isAutoplay) {
+                clearInterval(autoplayInterval);
+                isAutoplay = false;
+            }
+        }
+
+        function toggleAutoplay() {
+            if (isAutoplay) {
+                stopAutoplay();
+                showNotification('Autoplay stopped', 'warning');
+            } else {
+                startAutoplay();
+                showNotification('Autoplay started', 'success');
+            }
+        }
+
+        // Modal System
+        function setupModalSystem() {
+            $('[data-modal]').on('click', function() {
+                const modalId = $(this).data('modal');
+                $(`#${modalId}`).fadeIn();
+            });
+
+            $('.modal-close, .modal').on('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+
+            $(document).on('keyup', function(e) {
+                if (e.which === 27) { // Escape key
+                    closeModal();
+                }
+            });
+
+            $('.modal-content').on('click', function(e) {
+                e.stopPropagation();
+            });
+
+            $('#modal-form').on('submit', function(e) {
+                e.preventDefault();
+                const name = $(this).find('[name="modal-name"]').val();
+                const message = $(this).find('[name="modal-message"]').val();
+                showNotification(`Form submitted! Name: ${name}`, 'success');
+                closeModal();
+                $(this)[0].reset();
+            });
+        }
+
+        function closeModal() {
+            $('.modal').fadeOut();
+        }
+
+        function confirmAction() {
+            showNotification('Action confirmed and executed!', 'success');
+            closeModal();
+        }
+
+        // Tab System
+        function setupTabSystem() {
+            $('.tab-button').on('click', function() {
+                const targetTab = $(this).data('tab');
+                
+                $('.tab-button').removeClass('active');
+                $(this).addClass('active');
+                
+                $('.tab-content').removeClass('active');
+                $(`#${targetTab}`).addClass('active');
+            });
+        }
+
+        // Form Validation
+        function setupFormValidation() {
+            $('#validation-form').on('submit', function(e) {
+                e.preventDefault();
+                
+                let isValid = true;
+                const $form = $(this);
+                
+                // Clear previous errors
+                $form.find('.error-message').text('');
+                $form.find('input, textarea').removeClass('error');
+                
+                // Validate required fields
+                $form.find('[required]').each(function() {
+                    const $field = $(this);
+                    const value = $field.val().trim();
+                    
+                    if (value === '') {
+                        showFieldError($field, 'This field is required');
+                        isValid = false;
+                    }
+                });
+                
+                // Validate email format
+                const email = $('#email').val().trim();
+                if (email && !isValidEmail(email)) {
+                    showFieldError($('#email'), 'Please enter a valid email address');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    showNotification('Form validated successfully!', 'success');
+                    // Here you would normally submit the form
+                } else {
+                    showNotification('Please correct the errors and try again', 'error');
+                }
+            });
+
+            // Real-time validation
+            $('#validation-form input, #validation-form textarea').on('blur', function() {
+                const $field = $(this);
+                const value = $field.val().trim();
+                
+                if ($field.prop('required') && value === '') {
+                    showFieldError($field, 'This field is required');
+                } else if ($field.attr('type') === 'email' && value && !isValidEmail(value)) {
+                    showFieldError($field, 'Please enter a valid email address');
+                } else {
+                    clearFieldError($field);
+                }
+            });
+        }
+
+        function showFieldError($field, message) {
+            $field.addClass('error');
+            $field.siblings('.error-message').text(message);
+        }
+
+        function clearFieldError($field) {
+            $field.removeClass('error');
+            $field.siblings('.error-message').text('');
+        }
+
+        function isValidEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        function resetForm() {
+            $('#validation-form')[0].reset();
+            $('#validation-form .error-message').text('');
+            $('#validation-form input, #validation-form textarea').removeClass('error');
+            showNotification('Form reset!', 'info');
+        }
+
+        // Accordion
+        function setupAccordion() {
+            $('.accordion-header').on('click', function() {
+                const $header = $(this);
+                const $content = $header.next('.accordion-content');
+                const $item = $header.parent();
+                
+                // Close other accordion items
+                $('.accordion-item').not($item).find('.accordion-header').removeClass('active');
+                $('.accordion-item').not($item).find('.accordion-content').slideUp();
+                
+                // Toggle current item
+                $header.toggleClass('active');
+                $content.slideToggle();
+            });
+        }
+
+        // Counter and Progress
+        function incrementCounter() {
+            counter++;
+            updateCounterDisplay();
+        }
+
+        function decrementCounter() {
+            counter--;
+            updateCounterDisplay();
+        }
+
+        function resetCounter() {
+            counter = 0;
+            updateCounterDisplay();
+            $('#progress').css('width', '0%');
+        }
+
+        function updateCounterDisplay() {
+            $('#counter').text(counter);
+        }
+
+        function updateProgress() {
+            const progress = Math.min(Math.abs(counter) * 10, 100);
+            $('#progress').css('width', progress + '%');
+            showNotification(`Progress updated to ${progress}%`, 'info');
+        }
+
+        // Todo List
+        function addTodo() {
+            const todoText = $('#todo-input').val().trim();
+            if (todoText === '') {
+                showNotification('Please enter a task!', 'warning');
+                return;
+            }
+            
+            const todoId = 'todo-' + Date.now();
+            const $todoItem = $(`
+                <div class="todo-item" data-id="${todoId}">
+                    <input type="checkbox" onchange="toggleTodo('${todoId}')">
+                    <span class="todo-text">${todoText}</span>
+                    <button class="btn danger" style="margin-left: auto;" onclick="removeTodo('${todoId}')">Delete</button>
+                </div>
+            `);
+            
+            $('#todo-list').append($todoItem);
+            $('#todo-input').val('');
+            showNotification('Task added!', 'success');
+        }
+
+        function toggleTodo(todoId) {
+            const $todoItem = $(`[data-id="${todoId}"]`);
+            $todoItem.toggleClass('completed');
+        }
+
+        function removeTodo(todoId) {
+            $(`[data-id="${todoId}"]`).fadeOut(300, function() {
+                $(this).remove();
+            });
+            showNotification('Task removed!', 'info');
+        }
+
+        function clearCompleted() {
+            $('.todo-item.completed').fadeOut(300, function() {
+                $(this).remove();
+            });
+            showNotification('Completed tasks cleared!', 'success');
+        }
+
+        function clearAll() {
+            $('.todo-item').fadeOut(300, function() {
+                $(this).remove();
+            });
+            showNotification('All tasks cleared!', 'warning');
+        }
+
+        // Gallery
+        $(document).on('click', '.gallery-item', function() {
+            const imageNum = $(this).data('image');
+            showNotification(`Gallery item ${imageNum} clicked!`, 'info');
+            $(this).css('transform', 'scale(0.95)');
+            setTimeout(() => {
+                $(this).css('transform', '');
+            }, 150);
+        });
+
+        // AJAX Functions
+        function loadUsers() {
+            showLoading();
+            
+            // Simulate AJAX request
+            setTimeout(() => {
+                const users = [
+                    { id: 1, name: 'John Doe', email: 'john@example.com' },
+                    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+                    { id: 3, name: 'Bob Johnson', email: 'bob@example.com' }
+                ];
+                
+                let html = '<h3>Users:</h3><ul>';
+                users.forEach(user => {
+                    html += `<li>${user.name} - ${user.email}</li>`;
+                });
+                html += '</ul>';
+                
+                $('#ajax-content').html(html);
+                hideLoading();
+                showNotification('Users loaded successfully!', 'success');
+            }, 1500);
+        }
+
+        function loadPosts() {
+            showLoading();
+            
+            setTimeout(() => {
+                const posts = [
+                    { id: 1, title: 'Getting Started with jQuery', author: 'John Doe' },
+                    { id: 2, title: 'Advanced DOM Manipulation', author: 'Jane Smith' },
+                    { id: 3, title: 'AJAX Best Practices', author: 'Bob Johnson' }
+                ];
+                
+                let html = '<h3>Posts:</h3>';
+                posts.forEach(post => {
+                    html += `<div style="border: 1px solid #ddd; padding: 10px; margin: 5px 0; border-radius: 5px;">
+                        <strong>${post.title}</strong><br>
+                        <small>by ${post.author}</small>
+                    </div>`;
+                });
+                
+                $('#ajax-content').html(html);
+                hideLoading();
+                showNotification('Posts loaded successfully!', 'success');
+            }, 1200);
+        }
+
+        function simulateError() {
+            showLoading();
+            
+            setTimeout(() => {
+                $('#ajax-content').html('<div style="color: red; padding: 10px; border: 1px solid red; border-radius: 5px;">Error: Failed to load data. Please try again later.</div>');
+                hideLoading();
+                showNotification('Error occurred while loading data!', 'error');
+            }, 800);
+        }
+
+        function showLoading() {
+            $('#loading').show();
+        }
+
+        function hideLoading() {
+            $('#loading').hide();
+        }
+
+        // Context Menu Actions
+        function contextAction(action) {
+            showNotification(`Context menu action: ${action}`, 'info');
+            $('#context-menu').hide();
+        }
+
+        // Notification System
+        function showNotification(message, type = 'info') {
+            const $notification = $('#notification');
+            $notification
+                .removeClass('success error warning info')
+                .addClass(type)
+                .text(message)
+                .addClass('show');
+            
+            setTimeout(() => {
+                $notification.removeClass('show');
+            }, 3000);
+        }
+
+        // Allow Enter key in todo input
+        $('#todo-input').on('keypress', function(e) {
+            if (e.which === 13) {
+                addTodo();
+            }
+        });
+    </script>
+</body>
+</html>

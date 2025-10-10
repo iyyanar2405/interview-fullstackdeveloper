@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3: jQuery Selectors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .demo-area {
+            border: 2px dashed #ccc;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #fafafa;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 3px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .btn:hover { background-color: #0056b3; }
+        .btn.secondary { background-color: #6c757d; }
+        .btn.success { background-color: #28a745; }
+        .btn.danger { background-color: #dc3545; }
+        
+        .highlight { background-color: yellow !important; }
+        .selected { border: 3px solid red !important; }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            background-color: #333;
+            margin: 0;
+        }
+        nav li {
+            display: inline-block;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        nav .active {
+            background-color: #007bff;
+        }
+        
+        .form-group {
+            margin: 10px 0;
+        }
+        .form-group label {
+            display: inline-block;
+            width: 120px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .list-demo {
+            background-color: #e9ecef;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+        .list-demo.odd { background-color: #f8f9fa; }
+        .list-demo.even { background-color: #dee2e6; }
+        
+        .output {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 10px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Day 3: jQuery Selectors Interactive Demo</h1>
+        
+        <div class="container">
+            <h2>Basic Selectors</h2>
+            <div class="demo-area">
+                <p id="unique-paragraph">I have an ID selector!</p>
+                <p class="demo-class">I have a class selector!</p>
+                <p class="demo-class special">I have multiple classes!</p>
+                <div>I'm a div element</div>
+                <span>I'm a span element</span>
+            </div>
+            <div>
+                <button class="btn" onclick="selectById()">Select by ID (#unique-paragraph)</button>
+                <button class="btn" onclick="selectByClass()">Select by Class (.demo-class)</button>
+                <button class="btn" onclick="selectByElement()">Select by Element (p)</button>
+                <button class="btn" onclick="selectMultipleClasses()">Select Multiple Classes (.demo-class.special)</button>
+                <button class="btn secondary" onclick="clearSelections()">Clear Selections</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Hierarchical Selectors</h2>
+            <div class="demo-area" id="hierarchy-demo">
+                <div class="parent">
+                    <p class="child">Direct child paragraph</p>
+                    <div class="nested">
+                        <p class="descendant">Nested descendant paragraph</p>
+                    </div>
+                    <p class="child">Another direct child</p>
+                </div>
+                <p class="sibling">Sibling paragraph</p>
+                <p class="sibling">Another sibling</p>
+            </div>
+            <div>
+                <button class="btn" onclick="selectChildren()">Direct Children (.parent > p)</button>
+                <button class="btn" onclick="selectDescendants()">All Descendants (.parent p)</button>
+                <button class="btn" onclick="selectSiblings()">Adjacent Siblings (.parent + p)</button>
+                <button class="btn secondary" onclick="clearSelections()">Clear</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Form Selectors</h2>
+            <form class="demo-area">
+                <div class="form-group">
+                    <label>Text Input:</label>
+                    <input type="text" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" name="email" value="test@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" name="password">
+                </div>
+                <div class="form-group">
+                    <label>Options:</label>
+                    <input type="radio" name="option" value="1" checked> Option 1
+                    <input type="radio" name="option" value="2"> Option 2
+                </div>
+                <div class="form-group">
+                    <label>Features:</label>
+                    <input type="checkbox" name="feature1" checked> Feature 1
+                    <input type="checkbox" name="feature2"> Feature 2
+                    <input type="checkbox" name="feature3" checked> Feature 3
+                </div>
+                <div class="form-group">
+                    <label>Country:</label>
+                    <select name="country">
+                        <option value="">Select Country</option>
+                        <option value="us" selected>United States</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="ca">Canada</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn" disabled>Disabled Button</button>
+                    <button type="button" class="btn">Enabled Button</button>
+                </div>
+            </form>
+            <div>
+                <button class="btn" onclick="selectFormElements()">All Form Elements (:input)</button>
+                <button class="btn" onclick="selectRequired()">Required Fields ([required])</button>
+                <button class="btn" onclick="selectChecked()">Checked Elements (:checked)</button>
+                <button class="btn" onclick="selectDisabled()">Disabled Elements (:disabled)</button>
+                <button class="btn secondary" onclick="clearSelections()">Clear</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Pseudo-class Selectors</h2>
+            <ul class="demo-area">
+                <li class="list-demo">First item</li>
+                <li class="list-demo">Second item</li>
+                <li class="list-demo">Third item</li>
+                <li class="list-demo">Fourth item</li>
+                <li class="list-demo">Fifth item</li>
+                <li class="list-demo">Sixth item</li>
+            </ul>
+            <div>
+                <button class="btn" onclick="selectFirst()">First Element (:first)</button>
+                <button class="btn" onclick="selectLast()">Last Element (:last)</button>
+                <button class="btn" onclick="selectOdd()">Odd Elements (:nth-child(odd))</button>
+                <button class="btn" onclick="selectEven()">Even Elements (:nth-child(even))</button>
+                <button class="btn" onclick="selectByIndex()">3rd Element (:eq(2))</button>
+                <button class="btn secondary" onclick="clearSelections()">Clear</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Content and Attribute Selectors</h2>
+            <div class="demo-area">
+                <div data-role="header" class="content-demo">Header with data-role</div>
+                <div data-role="content" class="content-demo">Main content area</div>
+                <div data-role="footer" class="content-demo">Footer section</div>
+                <div class="content-demo">Element without data-role</div>
+                <div class="content-demo" title="This has a title">Element with title attribute</div>
+                <div class="content-demo empty-content"></div>
+            </div>
+            <div>
+                <button class="btn" onclick="selectByAttribute()">Has data-role ([data-role])</button>
+                <button class="btn" onclick="selectByAttributeValue()">data-role='header' ([data-role='header'])</button>
+                <button class="btn" onclick="selectWithTitle()">Has title ([title])</button>
+                <button class="btn" onclick="selectEmpty()">Empty Elements (:empty)</button>
+                <button class="btn secondary" onclick="clearSelections()">Clear</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Navigation Demo</h2>
+            <nav class="demo-area">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="http://external.com" target="_blank">External Link</a></li>
+                </ul>
+            </nav>
+            <div>
+                <button class="btn" onclick="selectNavLinks()">All Nav Links (nav a)</button>
+                <button class="btn" onclick="selectActiveLink()">Active Link (.active)</button>
+                <button class="btn" onclick="selectExternalLinks()">External Links ([href^='http'])</button>
+                <button class="btn secondary" onclick="clearSelections()">Clear</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Selector Testing Console</h2>
+            <div>
+                <input type="text" id="selector-input" placeholder="Enter jQuery selector (e.g., .demo-class)" style="width: 300px; padding: 8px;">
+                <button class="btn" onclick="testCustomSelector()">Test Selector</button>
+                <button class="btn danger" onclick="clearOutput()">Clear Console</button>
+            </div>
+            <div id="console-output" class="output">
+                Console output will appear here...<br>
+                Try selectors like: .demo-class, #unique-paragraph, p:first, input[required], :checked, etc.
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Selector Performance Comparison</h2>
+            <div>
+                <button class="btn" onclick="performanceTest()">Run Performance Test</button>
+            </div>
+            <div id="performance-output" class="output">
+                Click "Run Performance Test" to see selector performance comparison...
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Selector Reference Table</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Selector Type</th>
+                        <th>Syntax</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Universal</td><td>*</td><td>All elements</td><td>$('*')</td></tr>
+                    <tr><td>Element</td><td>element</td><td>All elements of type</td><td>$('p')</td></tr>
+                    <tr><td>ID</td><td>#id</td><td>Element with specific ID</td><td>$('#myId')</td></tr>
+                    <tr><td>Class</td><td>.class</td><td>Elements with specific class</td><td>$('.myClass')</td></tr>
+                    <tr><td>Descendant</td><td>A B</td><td>B inside A (any level)</td><td>$('div p')</td></tr>
+                    <tr><td>Child</td><td>A > B</td><td>B direct child of A</td><td>$('div > p')</td></tr>
+                    <tr><td>Adjacent Sibling</td><td>A + B</td><td>B immediately after A</td><td>$('h1 + p')</td></tr>
+                    <tr><td>Attribute</td><td>[attr]</td><td>Elements with attribute</td><td>$('[required]')</td></tr>
+                    <tr><td>Attribute Value</td><td>[attr=value]</td><td>Attribute equals value</td><td>$('[type="text"]')</td></tr>
+                    <tr><td>First</td><td>:first</td><td>First matched element</td><td>$('li:first')</td></tr>
+                    <tr><td>Last</td><td>:last</td><td>Last matched element</td><td>$('li:last')</td></tr>
+                    <tr><td>Nth Child</td><td>:nth-child(n)</td><td>Nth child element</td><td>$('li:nth-child(2)')</td></tr>
+                    <tr><td>Contains</td><td>:contains(text)</td><td>Elements containing text</td><td>$(':contains("Hello")')</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            console.log('jQuery Selectors Demo Ready!');
+            
+            // Initialize console output
+            logToConsole('jQuery Selectors Demo initialized. Try the interactive examples above!');
+        });
+
+        function logToConsole(message) {
+            var timestamp = new Date().toLocaleTimeString();
+            $('#console-output').append('[' + timestamp + '] ' + message + '<br>');
+            $('#console-output').scrollTop($('#console-output')[0].scrollHeight);
+        }
+
+        function clearSelections() {
+            $('.highlight, .selected').removeClass('highlight selected');
+            logToConsole('All selections cleared');
+        }
+
+        function clearOutput() {
+            $('#console-output').html('Console cleared...<br>');
+        }
+
+        // Basic Selectors
+        function selectById() {
+            clearSelections();
+            $('#unique-paragraph').addClass('selected');
+            logToConsole('Selected by ID: Found ' + $('#unique-paragraph').length + ' element(s)');
+        }
+
+        function selectByClass() {
+            clearSelections();
+            $('.demo-class').addClass('selected');
+            logToConsole('Selected by class: Found ' + $('.demo-class').length + ' element(s)');
+        }
+
+        function selectByElement() {
+            clearSelections();
+            $('p').addClass('selected');
+            logToConsole('Selected by element: Found ' + $('p').length + ' paragraph element(s)');
+        }
+
+        function selectMultipleClasses() {
+            clearSelections();
+            $('.demo-class.special').addClass('selected');
+            logToConsole('Selected multiple classes: Found ' + $('.demo-class.special').length + ' element(s)');
+        }
+
+        // Hierarchical Selectors
+        function selectChildren() {
+            clearSelections();
+            $('.parent > p').addClass('selected');
+            logToConsole('Direct children: Found ' + $('.parent > p').length + ' element(s)');
+        }
+
+        function selectDescendants() {
+            clearSelections();
+            $('.parent p').addClass('selected');
+            logToConsole('All descendants: Found ' + $('.parent p').length + ' element(s)');
+        }
+
+        function selectSiblings() {
+            clearSelections();
+            $('.parent + p').addClass('selected');
+            logToConsole('Adjacent siblings: Found ' + $('.parent + p').length + ' element(s)');
+        }
+
+        // Form Selectors
+        function selectFormElements() {
+            clearSelections();
+            $(':input').addClass('selected');
+            logToConsole('Form elements: Found ' + $(':input').length + ' element(s)');
+        }
+
+        function selectRequired() {
+            clearSelections();
+            $('[required]').addClass('selected');
+            logToConsole('Required fields: Found ' + $('[required]').length + ' element(s)');
+        }
+
+        function selectChecked() {
+            clearSelections();
+            $(':checked').addClass('selected');
+            logToConsole('Checked elements: Found ' + $(':checked').length + ' element(s)');
+        }
+
+        function selectDisabled() {
+            clearSelections();
+            $(':disabled').addClass('selected');
+            logToConsole('Disabled elements: Found ' + $(':disabled').length + ' element(s)');
+        }
+
+        // Pseudo-class Selectors
+        function selectFirst() {
+            clearSelections();
+            $('.list-demo:first').addClass('selected');
+            logToConsole('First element: Found ' + $('.list-demo:first').length + ' element(s)');
+        }
+
+        function selectLast() {
+            clearSelections();
+            $('.list-demo:last').addClass('selected');
+            logToConsole('Last element: Found ' + $('.list-demo:last').length + ' element(s)');
+        }
+
+        function selectOdd() {
+            clearSelections();
+            $('.list-demo:nth-child(odd)').addClass('selected');
+            logToConsole('Odd elements: Found ' + $('.list-demo:nth-child(odd)').length + ' element(s)');
+        }
+
+        function selectEven() {
+            clearSelections();
+            $('.list-demo:nth-child(even)').addClass('selected');
+            logToConsole('Even elements: Found ' + $('.list-demo:nth-child(even)').length + ' element(s)');
+        }
+
+        function selectByIndex() {
+            clearSelections();
+            $('.list-demo:eq(2)').addClass('selected');
+            logToConsole('Element at index 2: Found ' + $('.list-demo:eq(2)').length + ' element(s)');
+        }
+
+        // Content and Attribute Selectors
+        function selectByAttribute() {
+            clearSelections();
+            $('[data-role]').addClass('selected');
+            logToConsole('Elements with data-role: Found ' + $('[data-role]').length + ' element(s)');
+        }
+
+        function selectByAttributeValue() {
+            clearSelections();
+            $('[data-role="header"]').addClass('selected');
+            logToConsole('Elements with data-role="header": Found ' + $('[data-role="header"]').length + ' element(s)');
+        }
+
+        function selectWithTitle() {
+            clearSelections();
+            $('[title]').addClass('selected');
+            logToConsole('Elements with title attribute: Found ' + $('[title]').length + ' element(s)');
+        }
+
+        function selectEmpty() {
+            clearSelections();
+            $('.content-demo:empty').addClass('selected');
+            logToConsole('Empty elements: Found ' + $('.content-demo:empty').length + ' element(s)');
+        }
+
+        // Navigation Selectors
+        function selectNavLinks() {
+            clearSelections();
+            $('nav a').addClass('selected');
+            logToConsole('Navigation links: Found ' + $('nav a').length + ' element(s)');
+        }
+
+        function selectActiveLink() {
+            clearSelections();
+            $('nav .active').addClass('selected');
+            logToConsole('Active navigation link: Found ' + $('nav .active').length + ' element(s)');
+        }
+
+        function selectExternalLinks() {
+            clearSelections();
+            $('a[href^="http"]').addClass('selected');
+            logToConsole('External links: Found ' + $('a[href^="http"]').length + ' element(s)');
+        }
+
+        // Custom Selector Testing
+        function testCustomSelector() {
+            var selector = $('#selector-input').val().trim();
+            if (!selector) {
+                logToConsole('Please enter a selector to test');
+                return;
+            }
+            
+            try {
+                clearSelections();
+                var $elements = $(selector);
+                $elements.addClass('selected');
+                logToConsole('Selector "' + selector + '" found ' + $elements.length + ' element(s)');
+                
+                if ($elements.length > 0) {
+                    logToConsole('Selected elements: ' + $elements.map(function() {
+                        return this.tagName.toLowerCase() + 
+                               (this.id ? '#' + this.id : '') + 
+                               (this.className ? '.' + this.className.split(' ').join('.') : '');
+                    }).get().join(', '));
+                }
+            } catch (error) {
+                logToConsole('Error with selector "' + selector + '": ' + error.message);
+            }
+        }
+
+        // Performance Testing
+        function performanceTest() {
+            $('#performance-output').html('Running performance tests...<br>');
+            
+            var tests = [
+                { name: 'ID Selector', selector: '#unique-paragraph' },
+                { name: 'Class Selector', selector: '.demo-class' },
+                { name: 'Element Selector', selector: 'p' },
+                { name: 'Attribute Selector', selector: '[data-role]' },
+                { name: 'Pseudo-class Selector', selector: ':visible' },
+                { name: 'Complex Selector', selector: 'div .demo-class:first' }
+            ];
+            
+            var results = [];
+            
+            tests.forEach(function(test) {
+                var startTime = performance.now();
+                for (var i = 0; i < 1000; i++) {
+                    $(test.selector);
+                }
+                var endTime = performance.now();
+                var duration = (endTime - startTime).toFixed(3);
+                results.push({ name: test.name, time: duration });
+                $('#performance-output').append(test.name + ': ' + duration + 'ms (1000 iterations)<br>');
+            });
+            
+            results.sort(function(a, b) { return parseFloat(a.time) - parseFloat(b.time); });
+            $('#performance-output').append('<br><strong>Performance Ranking (fastest to slowest):</strong><br>');
+            results.forEach(function(result, index) {
+                $('#performance-output').append((index + 1) + '. ' + result.name + ' (' + result.time + 'ms)<br>');
+            });
+        }
+
+        // Allow Enter key in selector input
+        $('#selector-input').keypress(function(e) {
+            if (e.which === 13) {
+                testCustomSelector();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Step-by-Step Learning Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .course-overview {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .phases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .phase-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .phase-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .phase-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .phase-1 { background: #28a745; }
+        .phase-2 { background: #ffc107; }
+        .phase-3 { background: #fd7e14; }
+        .phase-4 { background: #dc3545; }
+        
+        .day-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .day-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+        
+        .day-item:last-child {
+            border-bottom: none;
+        }
+        
+        .day-status {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        
+        .status-complete { background-color: #28a745; }
+        .status-available { background-color: #17a2b8; }
+        .status-planned { background-color: #6c757d; }
+        
+        .quick-access {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .access-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .access-card {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+        
+        .access-card:hover {
+            border-color: #007bff;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,123,255,0.2);
+            text-decoration: none;
+            color: #007bff;
+        }
+        
+        .access-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #6c757d, #495057);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #28a745, #1e7e34);
+        }
+        
+        .testimonials {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .testimonial {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 4px solid #007bff;
+            background: #f8f9fa;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .phases-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>jQuery Mastery Course</h1>
+            <p>Complete Step-by-Step Learning Path from Beginner to Expert</p>
+        </div>
+
+        <div class="course-overview">
+            <h2>🎯 Course Overview</h2>
+            <p>Master jQuery with our comprehensive 45-day learning program. From basic DOM manipulation to advanced plugin development, this course provides everything you need to become a jQuery expert.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">45</span>
+                    <span>Days of Learning</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">15+</span>
+                    <span>Complete Projects</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">200+</span>
+                    <span>Hours of Content</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100+</span>
+                    <span>Interactive Examples</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-access">
+            <h2>🚀 Quick Access</h2>
+            <div class="access-grid">
+                <a href="GETTING-STARTED.md" class="access-card">
+                    <div class="access-icon">📚</div>
+                    <h3>Getting Started</h3>
+                    <p>Complete setup guide and learning path</p>
+                </a>
+                
+                <a href="Examples/complete-examples.html" class="access-card">
+                    <div class="access-icon">💻</div>
+                    <h3>Live Examples</h3>
+                    <p>Interactive demonstrations of all jQuery concepts</p>
+                </a>
+                
+                <a href="Resources/quick-reference.md" class="access-card">
+                    <div class="access-icon">📖</div>
+                    <h3>Quick Reference</h3>
+                    <p>Complete jQuery API reference and cheat sheet</p>
+                </a>
+                
+                <a href="Resources/best-practices.md" class="access-card">
+                    <div class="access-icon">⭐</div>
+                    <h3>Best Practices</h3>
+                    <p>Industry-standard coding practices and patterns</p>
+                </a>
+                
+                <a href="Projects/README.md" class="access-card">
+                    <div class="access-icon">🛠️</div>
+                    <h3>Projects</h3>
+                    <p>15+ complete projects from beginner to expert</p>
+                </a>
+                
+                <a href="CURRICULUM.md" class="access-card">
+                    <div class="access-icon">📋</div>
+                    <h3>Full Curriculum</h3>
+                    <p>Detailed 45-day learning curriculum</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="phases-grid">
+            <div class="phase-card">
+                <div class="phase-header">
+                    <div class="phase-icon phase-1">1</div>
+                    <div>
+                        <h3>Foundation Phase</h3>
+                        <p>Days 1-7 • Status: ✅ Ready</p>
+                    </div>
+                </div>
+                <p>Master the fundamentals of jQuery including selectors, DOM manipulation, events, and basic animations.</p>
+                <ul class="day-list">
+                    <li class="day-item">
+                        <div class="day-status status-complete"></div>
+                        <a href="01-Foundation/Day01-Introduction/lesson.md">Day 1: Introduction to jQuery</a>
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-complete"></div>
+                        <a href="01-Foundation/Day02-Setup-Syntax/lesson.md">Day 2: Setup and Basic Syntax</a>
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-complete"></div>
+                        <a href="01-Foundation/Day03-Selectors/lesson.md">Day 3: Selectors Mastery</a>
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-complete"></div>
+                        <a href="01-Foundation/Day04-DOM-Manipulation/lesson.md">Day 4: DOM Manipulation</a>
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-complete"></div>
+                        <a href="01-Foundation/Day05-Events/lesson.md">Day 5: Event Handling</a>
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-available"></div>
+                        Day 6: Basic Animations and Effects
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-available"></div>
+                        Day 7: Foundation Project
+                    </li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <div class="phase-icon phase-2">2</div>
+                    <div>
+                        <h3>Intermediate Phase</h3>
+                        <p>Days 8-21 • Status: 🟡 In Development</p>
+                    </div>
+                </div>
+                <p>Advance your skills with AJAX, form handling, UI components, and custom functions.</p>
+                <ul class="day-list">
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Day 8: Advanced Selectors and Filtering
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Day 9: AJAX Basics with jQuery
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Day 10: Advanced AJAX and API Integration
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Day 11: Form Handling and Validation
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Days 12-21: UI Components & Projects
+                    </li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <div class="phase-icon phase-3">3</div>
+                    <div>
+                        <h3>Advanced Phase</h3>
+                        <p>Days 22-35 • Status: 📋 Planned</p>
+                    </div>
+                </div>
+                <p>Learn advanced techniques including performance optimization, plugin development, and complex projects.</p>
+                <ul class="day-list">
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Day 22: Performance Optimization
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Days 23-24: Plugin Development
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Day 25: Framework Integration
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Day 26: Testing jQuery Applications
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Days 27-35: Advanced Projects
+                    </li>
+                </ul>
+            </div>
+
+            <div class="phase-card">
+                <div class="phase-header">
+                    <div class="phase-icon phase-4">4</div>
+                    <div>
+                        <h3>Expert Phase</h3>
+                        <p>Days 36-45 • Status: 📋 Planned</p>
+                    </div>
+                </div>
+                <p>Achieve mastery with jQuery internals, enterprise patterns, and capstone projects.</p>
+                <ul class="day-list">
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Days 36-37: jQuery Source Code Analysis
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Day 38: Memory Management
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Days 39-40: Advanced Widget Development
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Day 41: Enterprise Applications
+                    </li>
+                    <li class="day-item">
+                        <div class="day-status status-planned"></div>
+                        Days 42-45: Capstone Project
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="testimonials">
+            <h2>🌟 What Learners Say</h2>
+            <div class="testimonial">
+                "This jQuery course transformed my web development skills. The step-by-step approach and practical projects made complex concepts easy to understand."
+                <br><strong>- Sarah Johnson, Front-End Developer</strong>
+            </div>
+            <div class="testimonial">
+                "The interactive examples and comprehensive coverage helped me land my dream job. Highly recommended for anyone serious about jQuery mastery."
+                <br><strong>- Michael Chen, Full-Stack Developer</strong>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 3rem 0;">
+            <h2>Ready to Start Your jQuery Journey?</h2>
+            <p style="font-size: 1.1rem; margin: 1rem 0; opacity: 0.8; color: white;">Join thousands of developers who have mastered jQuery with our comprehensive course.</p>
+            
+            <div style="margin: 2rem 0;">
+                <a href="GETTING-STARTED.md" class="btn btn-success" style="margin: 0.5rem;">
+                    🚀 Start Learning Now
+                </a>
+                <a href="Examples/complete-examples.html" class="btn btn-secondary" style="margin: 0.5rem;">
+                    🔍 View Examples
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 jQuery Step-by-Step Learning Course</p>
+            <p>Comprehensive • Interactive • Professional • Free</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">
+                📧 Questions? Check our documentation or join the community!
+            </p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Add smooth scroll behavior
+            $('a[href^="#"]').on('click', function(e) {
+                e.preventDefault();
+                var target = this.hash;
+                var $target = $(target);
+                
+                if ($target.length) {
+                    $('html, body').animate({
+                        scrollTop: $target.offset().top - 20
+                    }, 500);
+                }
+            });
+            
+            // Add hover effects to cards
+            $('.phase-card, .access-card').hover(
+                function() {
+                    $(this).css('transform', 'translateY(-5px)');
+                },
+                function() {
+                    $(this).css('transform', 'translateY(0)');
+                }
+            );
+            
+            // Animate stats on scroll
+            function animateStats() {
+                $('.stat-number').each(function() {
+                    var $this = $(this);
+                    var target = parseInt($this.text().replace('+', ''));
+                    var current = 0;
+                    var increment = target / 50;
+                    
+                    var timer = setInterval(function() {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        
+                        var displayValue = Math.floor(current);
+                        if ($this.text().includes('+')) {
+                            displayValue += '+';
+                        }
+                        $this.text(displayValue);
+                    }, 50);
+                });
+            }
+            
+            // Check if stats are in viewport and animate
+            $(window).on('scroll', function() {
+                var statsOffset = $('.stats-grid').offset();
+                if (statsOffset && $(window).scrollTop() + $(window).height() > statsOffset.top) {
+                    animateStats();
+                    $(window).off('scroll'); // Run only once
+                }
+            });
+            
+            // Add welcome message
+            setTimeout(function() {
+                console.log('🎉 Welcome to jQuery Step-by-Step Learning!');
+                console.log('💡 Start your journey: GETTING-STARTED.md');
+                console.log('🚀 Interactive examples: Examples/complete-examples.html');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
