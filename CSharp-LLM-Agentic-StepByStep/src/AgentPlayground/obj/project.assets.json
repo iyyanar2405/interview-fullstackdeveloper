@@ -216,11 +216,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\POC\\Full-stack-developer\\interview-fullstackdeveloper\\CSharp-LLM-Agentic-StepByStep\\src\\AgentPlayground\\AgentPlayground.csproj",
+      "projectUniqueName": "E:\\interview-fullstack\\interview-fullstackdeveloper\\CSharp-LLM-Agentic-StepByStep\\src\\AgentPlayground\\AgentPlayground.csproj",
       "projectName": "AgentPlayground",
-      "projectPath": "C:\\POC\\Full-stack-developer\\interview-fullstackdeveloper\\CSharp-LLM-Agentic-StepByStep\\src\\AgentPlayground\\AgentPlayground.csproj",
+      "projectPath": "E:\\interview-fullstack\\interview-fullstackdeveloper\\CSharp-LLM-Agentic-StepByStep\\src\\AgentPlayground\\AgentPlayground.csproj",
       "packagesPath": "C:\\Users\\iyyan\\.nuget\\packages\\",
-      "outputPath": "C:\\POC\\Full-stack-developer\\interview-fullstackdeveloper\\CSharp-LLM-Agentic-StepByStep\\src\\AgentPlayground\\obj\\",
+      "outputPath": "E:\\interview-fullstack\\interview-fullstackdeveloper\\CSharp-LLM-Agentic-StepByStep\\src\\AgentPlayground\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
