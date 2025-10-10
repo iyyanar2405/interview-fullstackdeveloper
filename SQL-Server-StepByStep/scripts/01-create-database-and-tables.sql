@@ -1,0 +1,53 @@
+-- Create training database
+IF DB_ID('EcomTraining') IS NULL
+BEGIN
+  CREATE DATABASE EcomTraining;
+END
+GO
+
+USE EcomTraining;
+GO
+
+-- Schema
+IF NOT EXISTS (SELECT 1 FROM sys.schemas WHERE name = 'sales') EXEC('CREATE SCHEMA sales');
+GO
+
+-- Tables
+IF OBJECT_ID('sales.Customers') IS NULL
+CREATE TABLE sales.Customers (
+  CustomerId INT IDENTITY(1,1) PRIMARY KEY,
+  FirstName NVARCHAR(50) NOT NULL,
+  LastName NVARCHAR(50) NOT NULL,
+  Email NVARCHAR(255) NOT NULL,
+  CreatedAt DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME()
+);
+GO
+
+IF OBJECT_ID('sales.Products') IS NULL
+CREATE TABLE sales.Products (
+  ProductId INT IDENTITY(1,1) PRIMARY KEY,
+  Sku NVARCHAR(50) NOT NULL,
+  Name NVARCHAR(200) NOT NULL,
+  Price DECIMAL(10,2) NOT NULL,
+  CreatedAt DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME()
+);
+GO
+
+IF OBJECT_ID('sales.Orders') IS NULL
+CREATE TABLE sales.Orders (
+  OrderId INT IDENTITY(1,1) PRIMARY KEY,
+  CustomerId INT NOT NULL,
+  OrderDate DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+  Status NVARCHAR(20) NOT NULL DEFAULT 'NEW'
+);
+GO
+
+IF OBJECT_ID('sales.OrderItems') IS NULL
+CREATE TABLE sales.OrderItems (
+  OrderItemId INT IDENTITY(1,1) PRIMARY KEY,
+  OrderId INT NOT NULL,
+  ProductId INT NOT NULL,
+  Quantity INT NOT NULL CHECK (Quantity > 0),
+  UnitPrice DECIMAL(10,2) NOT NULL
+);
+GO

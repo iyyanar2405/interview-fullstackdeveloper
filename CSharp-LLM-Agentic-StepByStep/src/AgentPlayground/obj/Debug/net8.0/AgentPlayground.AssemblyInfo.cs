@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AgentPlayground")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b6ac3fc60b9cef1cafbda7a02dc43137edaf13b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+50af40f52b057ebdf04e89ec3f4513e7699ad9b9")]
 [assembly: System.Reflection.AssemblyProductAttribute("AgentPlayground")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AgentPlayground")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
