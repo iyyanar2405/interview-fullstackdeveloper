@@ -1,0 +1,5 @@
+/home/runner/work/interview-fullstackdeveloper/interview-fullstackdeveloper/CSharp-LLM-Agentic-StepByStep/src/AgentPlayground/obj/Debug/net8.0/AgentPlayground.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/interview-fullstackdeveloper/interview-fullstackdeveloper/CSharp-LLM-Agentic-StepByStep/src/AgentPlayground/obj/Debug/net8.0/AgentPlayground.AssemblyInfoInputs.cache
+/home/runner/work/interview-fullstackdeveloper/interview-fullstackdeveloper/CSharp-LLM-Agentic-StepByStep/src/AgentPlayground/obj/Debug/net8.0/AgentPlayground.AssemblyInfo.cs
+/home/runner/work/interview-fullstackdeveloper/interview-fullstackdeveloper/CSharp-LLM-Agentic-StepByStep/src/AgentPlayground/obj/Debug/net8.0/AgentPlayground.csproj.CoreCompileInputs.cache
+/home/runner/work/interview-fullstackdeveloper/interview-fullstackdeveloper/CSharp-LLM-Agentic-StepByStep/src/AgentPlayground/obj/Debug/net8.0/AgentPlayground.sourcelink.json

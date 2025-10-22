@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aZTN2Wy8hNU=",
+  "dgSpecHash": "60pibvk6EBI=",
   "success": true,
-  "projectFilePath": "E:\\interview-fullstack\\interview-fullstackdeveloper\\CSharp-LLM-Agentic-StepByStep\\mcp\\MinimalMcpServer\\MinimalMcpServer.csproj",
+  "projectFilePath": "/home/runner/work/interview-fullstackdeveloper/interview-fullstackdeveloper/CSharp-LLM-Agentic-StepByStep/mcp/MinimalMcpServer/MinimalMcpServer.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
