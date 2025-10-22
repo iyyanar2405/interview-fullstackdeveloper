@@ -1,0 +1,36 @@
+@AuthTokenApi_HostAddress = http://localhost:7136
+
+### GET /weatherforecast - Sample endpoint
+GET {{AuthTokenApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+### GET /api/authorize/token - This will return 405 Method Not Allowed
+### Because the endpoint only accepts POST requests
+GET {{AuthTokenApi_HostAddress}}/api/authorize/token
+Accept: application/json
+
+###
+
+### POST /api/authorize/token - Correct method (Success)
+POST {{AuthTokenApi_HostAddress}}/api/authorize/token
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "testpass"
+}
+
+###
+
+### POST /api/authorize/token - Error case (Missing credentials)
+POST {{AuthTokenApi_HostAddress}}/api/authorize/token
+Content-Type: application/json
+
+{
+  "username": "",
+  "password": ""
+}
+
+###
