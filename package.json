@@ -1,0 +1,20 @@
+{
+  "name": "interview-fullstackdeveloper",
+  "version": "1.0.0",
+  "description": "Full Stack Developer Interview Preparation Repository",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": [
+    "interview",
+    "fullstack",
+    "developer",
+    "learning"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nx": "^20.0.0"
+  }
+}

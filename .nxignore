@@ -1,0 +1,11 @@
+# Nx ignore file - directories to exclude from project graph
+node_modules
+.git
+.vs
+bin
+obj
+dist
+build
+out
+*.log
+.cache
